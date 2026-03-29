@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // 获取 DOM 元素
     const door = document.getElementById('door');
-    const window = document.getElementById('window');
+    const windowEl = document.getElementById('window');
     const tallWindow = document.getElementById('tallWindow');
     const doghouse = document.getElementById('doghouse');
     const hint = document.getElementById('hint');
@@ -47,7 +47,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
     
     // 点击主窗户看状态
-    window.addEventListener('click', function(e) {
+    windowEl.addEventListener('click', function(e) {
         e.stopPropagation();
         showServerStatus();
     });
