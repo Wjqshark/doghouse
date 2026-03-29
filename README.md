@@ -20,7 +20,10 @@
 doghouse/
 ├── index.html          # 首页 —— 犬舍外观主场景
 ├── script.js           # 首页交互逻辑（开门动画、弹窗、状态更新）
-├── style.css           # 全局样式（动画、犬舍、院子、UI 组件）
+├── style.css           # 全局样式（动画、犬舍、院子、UI 组件、弹窗）
+├── assets/
+│   └── css/
+│       └── room-base.css   # 房间公共样式（CSS 变量 + 共享组件）
 └── rooms/
     ├── study.html      # 📚 书房 —— 深度阅读笔记
     ├── creation.html   # 🎨 创作室 —— 四格漫画、音乐作品
@@ -90,7 +93,7 @@ npx http-server -p 8080
 
 ## 📋 已知问题与路线图
 
-详见 [ROADMAP.md](./ROADMAP.md)
+详见 [ROADMAP.md](./ROADMAP.md) · [架构指南](./ARCHITECTURE.md)
 
 ---
 

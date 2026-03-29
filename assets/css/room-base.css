@@ -1,0 +1,143 @@
+/* ==================== 小红狗的家 —— 房间公共样式 ==================== */
+/*
+ * 各房间在自己的 <style> 块里覆盖以下三个变量即可切换主题色：
+ *
+ *   :root {
+ *       --theme-color: #8B4513;   主色（标题、边框、按钮背景）
+ *       --theme-light: #f0e6dd;   浅色（标签背景）
+ *       --theme-dark:  #654321;   深色（按钮 hover）
+ *   }
+ */
+
+:root {
+    --theme-color: #8B4513;
+    --theme-light: #f0e6dd;
+    --theme-dark:  #654321;
+}
+
+/* ==================== 基础覆盖 ==================== */
+
+body {
+    overflow: auto;
+}
+
+/* ==================== 页面布局 ==================== */
+
+.room-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 20px;
+}
+
+/* ==================== 房间标题 ==================== */
+
+.room-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.room-header h1 {
+    font-size: 2.5em;
+    color: var(--theme-color);
+    margin-bottom: 10px;
+}
+
+.room-header p {
+    color: #666;
+    font-size: 1.1em;
+}
+
+/* ==================== 返回按钮 ==================== */
+
+.back-btn {
+    display: inline-block;
+    background: var(--theme-color);
+    color: white;
+    padding: 12px 30px;
+    border-radius: 25px;
+    text-decoration: none;
+    margin-bottom: 20px;
+    transition: background 0.3s;
+}
+
+.back-btn:hover {
+    background: var(--theme-dark);
+}
+
+/* ==================== 标签 ==================== */
+
+.tag {
+    display: inline-block;
+    background: var(--theme-light);
+    color: var(--theme-color);
+    padding: 4px 12px;
+    border-radius: 15px;
+    font-size: 0.8em;
+    margin-right: 8px;
+}
+
+/* ==================== 内容网格 ==================== */
+
+.bookshelf,
+.gallery,
+.tools-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 25px;
+    margin-top: 30px;
+}
+
+/* 会客厅帖子列表略宽，保留原始最小宽度 */
+.posts {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 25px;
+    margin-top: 30px;
+}
+
+/* ==================== 通用卡片 ==================== */
+/*
+ * 书房   → .book
+ * 创作室  → .artwork
+ * 会客厅  → .post
+ * 工作室  → .tool
+ */
+
+.book,
+.artwork,
+.post,
+.tool {
+    background: white;
+    border-radius: 15px;
+    padding: 25px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s;
+    border-left: 5px solid var(--theme-color);
+}
+
+.book:hover,
+.artwork:hover,
+.post:hover,
+.tool:hover {
+    transform: translateY(-5px);
+}
+
+.book h3,
+.artwork h3,
+.post h3,
+.tool h3 {
+    color: var(--theme-color);
+    margin-bottom: 15px;
+    font-size: 1.4em;
+}
+
+.book .meta,
+.artwork .meta,
+.post .meta,
+.tool .meta {
+    font-size: 0.85em;
+    color: #888;
+    margin-top: 15px;
+    padding-top: 10px;
+    border-top: 1px solid #eee;
+}

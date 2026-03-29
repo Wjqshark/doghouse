@@ -62,35 +62,24 @@ window.closeModal = function() { ... };
 
 ## 📦 待优化项（非 Bug）
 
-### O-1：消除各房间重复 CSS
+### ~~O-1：消除各房间重复 CSS~~（✅ 已修复）
 
-四个房间页面（`study`、`creation`、`living`、`workshop`）的 `<style>` 块中存在大量重复代码（`.back-btn`、`.tag`、`.room-header`、`.room-container`、卡片 hover 动画等）。
-
-**建议：** 新建 `rooms/room-base.css`，提取公共样式，各房间仅保留差异样式（主题色变量）。
-
----
-
-### O-2：弹窗样式内联注入
-
-**文件：** `script.js` `getModalStyles()` 函数（第 254–420 行）
-
-每次开门都向 `<head>` 注入一大段 CSS 字符串，虽有防重复检测，但维护性极差，样式与逻辑耦合。
-
-**建议：** 将弹窗样式移入 `style.css` 末尾，彻底删除 `getModalStyles()` 函数。
+**文件：** `rooms/*.html`  
+**修复：** 新建 `assets/css/room-base.css`，提取公共样式（`.room-container`、`.room-header`、`.back-btn`、`.tag`、卡片样式）。各房间通过 CSS 变量（`--theme-color` / `--theme-light` / `--theme-dark`）声明主题色，仅保留差异样式。
 
 ---
 
-### O-3：中文字体栈缺失
+### ~~O-2：弹窗样式内联注入~~（✅ 已修复）
 
-**文件：** `style.css` 第 11 行
+**文件：** `script.js` → `style.css`  
+**修复：** 将弹窗样式迁移至 `style.css` 末尾的「欢迎弹窗」区块，彻底删除 `getModalStyles()` 函数。
 
-```css
-font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-```
+---
 
-`Segoe UI` 是 Windows 系统字体，在 iOS / Android 上 fallback 到默认系统字体，中文渲染不理想。
+### ~~O-3：中文字体栈缺失~~（✅ 已修复）
 
-**建议：**
+**文件：** `style.css` 第 11 行  
+**修复：** 字体栈更新为：
 
 ```css
 font-family: 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
@@ -98,11 +87,10 @@ font-family: 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', s
 
 ---
 
-### O-4：CSS 动画性能优化
+### ~~O-4：CSS 动画性能优化~~（✅ 已修复）
 
-首页同时运行多个动画（太阳、云朵 1/2/3、小鸟 1/2、烟雾等），在低端移动设备上可能掉帧。
-
-**建议：** 对持续运动的元素添加 `will-change: transform`，提示浏览器提前进行图层合成：
+**文件：** `style.css`  
+**修复：** 对持续运动的元素添加 `will-change: transform`：
 
 ```css
 .cloud, .bird, .sun-core { will-change: transform; }
@@ -171,19 +159,21 @@ font-family: 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', s
 
 ### 中期（v0.3.0）
 
-- [ ] **提取 `rooms/room-base.css`**，消除四个房间页面的重复 CSS
-- [ ] **将弹窗样式从 JS 移入 `style.css`**，删除 `getModalStyles()` 函数
-- [ ] **弹窗支持遮罩点击 + Esc 键关闭**
+- [x] **提取 `assets/css/room-base.css`**：消除四个房间页面的重复 CSS（O-1）
+- [x] **将弹窗样式从 JS 移入 `style.css`**：删除 `getModalStyles()` 函数（O-2）
+- [x] **弹窗支持遮罩点击 + Esc 键关闭**（B-6）
+- [x] **添加中文字体栈**（O-3）
+- [x] **CSS 动画性能优化**：`will-change: transform`（O-4）
 - [ ] **实现 `playSound()` 音效功能**（目前仅 console.log，无实际音效）
-- [ ] **添加中文字体栈**
-- [ ] **工作室状态面板动态化**（JS 模拟或接入真实 API）
+- [ ] **工作室状态面板动态化**（JS 模拟或接入真实 API）（O-5）
 
 ### 长期（v1.0.0）
 
 - [ ] **夜间模式**（style.css 已有天空渐变，可扩展为日夜切换）
 - [ ] **数据与展示分离**：内容提取为 JSON，用 JS 动态渲染，便于维护
-- [ ] **SEO 优化**：补充 meta description 和 Open Graph 标签
-- [ ] **无障碍改造**：为所有交互元素添加 ARIA 属性和键盘导航支持
+- [ ] **SEO 优化**：补充 meta description 和 Open Graph 标签（O-8）
+- [ ] **无障碍改造**：为所有交互元素添加 ARIA 属性和键盘导航支持（O-7）
+- [ ] **移动端触摸区域优化**：增大可点击区域（O-6）
 - [ ] **书房新内容**：持续添加深度阅读笔记
 - [ ] **创作室新内容**：更多漫画和音乐作品
 
@@ -194,6 +184,7 @@ font-family: 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', s
 | 版本 | 日期 | 说明 |
 |------|------|------|
 | v0.1.0 | 2026-03-29 | 初始提交：犬舍主页 + 四个房间（书房、创作室、会客厅、工作室） |
+| v0.3.0 | 2026-03-29 | 架构优化：提取公共 CSS、弹窗样式外置、字体与动画性能改进 |
 
 ---
 

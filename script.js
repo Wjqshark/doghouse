@@ -227,19 +227,27 @@ document.addEventListener('DOMContentLoaded', function() {
                         <span class="room-btn-desc">技术技能展示</span>
                     </a>
                 </div>
-                <button class="close-btn" onclick="closeModal()">先看看外观</button>
+                <button class="close-btn">先看看外观</button>
             </div>
         `;
         
         document.body.appendChild(modal);
         
-        // 添加样式（如果还没有）
-        if (!document.querySelector('.modal-styles')) {
-            const style = document.createElement('style');
-            style.className = 'modal-styles';
-            style.textContent = getModalStyles();
-            document.head.appendChild(style);
+        function closeModal() {
+            modal.style.animation = 'fadeOut 0.3s ease';
+            setTimeout(() => modal.remove(), 300);
+            document.removeEventListener('keydown', escHandler);
         }
+        
+        function escHandler(e) {
+            if (e.key === 'Escape') closeModal();
+        }
+        
+        modal.querySelector('.close-btn').addEventListener('click', closeModal);
+        modal.addEventListener('click', function(e) {
+            if (e.target === modal) closeModal();
+        });
+        document.addEventListener('keydown', escHandler);
     }
     
     // 获取随机状态
@@ -250,188 +258,6 @@ document.addEventListener('DOMContentLoaded', function() {
         ];
         return allStatus[Math.floor(Math.random() * allStatus.length)];
     }
-    
-    // 获取弹窗样式
-    function getModalStyles() {
-        return `
-            @keyframes fadeIn {
-                from { opacity: 0; }
-                to { opacity: 1; }
-            }
-            
-            @keyframes fadeOut {
-                from { opacity: 1; }
-                to { opacity: 0; }
-            }
-            
-            .welcome-modal {
-                position: fixed;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                background: rgba(135, 206, 235, 0.7);
-                backdrop-filter: blur(3px);
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                z-index: 1000;
-                animation: fadeIn 0.3s ease;
-            }
-            
-            .modal-content {
-                background: linear-gradient(135deg, rgba(255, 255, 255, 0.98), rgba(240, 248, 255, 0.95));
-                padding: 30px;
-                border-radius: 20px;
-                text-align: center;
-                max-width: 500px;
-                width: 90%;
-                box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
-                border: 2px solid rgba(255, 255, 255, 0.8);
-            }
-            
-            .modal-content h2 {
-                color: #FF6B6B;
-                margin-bottom: 5px;
-            }
-            
-            .subtitle {
-                color: #888;
-                font-size: 12px;
-                margin-bottom: 20px;
-            }
-            
-            .modal-content p {
-                color: #666;
-                margin-bottom: 20px;
-            }
-            
-            .current-status {
-                background: rgba(255, 250, 240, 0.8);
-                padding: 15px;
-                border-radius: 10px;
-                margin: 15px 0;
-                border: 1px solid rgba(255, 220, 180, 0.5);
-            }
-            
-            .status-row {
-                display: flex;
-                justify-content: space-between;
-                padding: 8px 0;
-                border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-            }
-            
-            .status-row:last-child {
-                border-bottom: none;
-            }
-            
-            .status-label {
-                color: #888;
-            }
-            
-            .status-value {
-                font-weight: bold;
-                color: #333;
-            }
-            
-            .room-buttons {
-                display: flex;
-                flex-direction: column;
-                gap: 12px;
-                margin: 20px 0;
-            }
-            
-            .room-btn {
-                display: flex;
-                align-items: center;
-                gap: 15px;
-                padding: 18px 25px;
-                border-radius: 15px;
-                text-decoration: none;
-                transition: transform 0.3s ease, box-shadow 0.3s ease;
-                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
-                position: relative;
-                overflow: hidden;
-            }
-            
-            .room-btn:hover {
-                transform: translateX(5px);
-                box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
-            }
-            
-            .room-btn-icon {
-                font-size: 36px;
-                min-width: 45px;
-                text-align: center;
-            }
-            
-            .room-btn-content {
-                flex: 1;
-                text-align: left;
-            }
-            
-            .room-btn-title {
-                display: block;
-                font-size: 18px;
-                font-weight: bold;
-                color: white;
-                margin-bottom: 3px;
-            }
-            
-            .room-btn-desc {
-                display: block;
-                font-size: 13px;
-                color: rgba(255, 255, 255, 0.9);
-            }
-            
-            /* 各房间颜色 */
-            .study-btn {
-                background: linear-gradient(135deg, #8B4513, #A0522D);
-            }
-            
-            .create-btn {
-                background: linear-gradient(135deg, #9B59B6, #8E44AD);
-            }
-            
-            .living-btn {
-                background: linear-gradient(135deg, #E74C3C, #C0392B);
-            }
-            
-            .work-btn {
-                background: linear-gradient(135deg, #3498DB, #2980B9);
-            }
-            
-            .close-btn {
-                background: #f5f5f5;
-                border: 1px solid #ddd;
-                padding: 12px 30px;
-                border-radius: 25px;
-                cursor: pointer;
-                font-size: 14px;
-                color: #666;
-                transition: all 0.3s ease;
-            }
-            
-            .close-btn:hover {
-                background: #e8e8e8;
-                box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            }
-        `;
-    }
-    
-    // 关闭弹窗
-    window.closeModal = function() {
-        const modal = document.querySelector('.welcome-modal');
-        if (modal) {
-            modal.style.animation = 'fadeOut 0.3s ease';
-            setTimeout(() => {
-                modal.remove();
-                // 清理样式
-                const modalStyles = document.querySelector('.modal-styles');
-                if (modalStyles) modalStyles.remove();
-            }, 300);
-        }
-    };
     
     // 房间卡片点击事件代理
     document.addEventListener('click', function(e) {

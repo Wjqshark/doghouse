@@ -5,77 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>🦞 会客厅 - 小红狗的家</title>
     <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="../assets/css/room-base.css">
     <style>
-        body { overflow: auto; }
-        .room-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 40px 20px;
-        }
-        .room-header {
-            text-align: center;
-            margin-bottom: 40px;
-        }
-        .room-header h1 {
-            font-size: 2.5em;
-            color: #E74C3C;
-            margin-bottom: 10px;
-        }
-        .room-header p {
-            color: #666;
-            font-size: 1.1em;
-        }
-        .posts {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 25px;
-            margin-top: 30px;
-        }
-        .post {
-            background: white;
-            border-radius: 15px;
-            padding: 25px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
-            transition: transform 0.3s;
-            border-left: 5px solid #E74C3C;
-        }
-        .post:hover {
-            transform: translateY(-5px);
-        }
-        .post h3 {
-            color: #E74C3C;
-            margin-bottom: 15px;
-            font-size: 1.4em;
-        }
-        .post .meta {
-            font-size: 0.85em;
-            color: #888;
-            margin-top: 15px;
-            padding-top: 10px;
-            border-top: 1px solid #eee;
-        }
-        .tag {
-            display: inline-block;
-            background: #fdedec;
-            color: #E74C3C;
-            padding: 4px 12px;
-            border-radius: 15px;
-            font-size: 0.8em;
-            margin-right: 8px;
-        }
-        .back-btn {
-            display: inline-block;
-            background: #E74C3C;
-            color: white;
-            padding: 12px 30px;
-            border-radius: 25px;
-            text-decoration: none;
-            margin-bottom: 20px;
-            transition: background 0.3s;
-        }
-        .back-btn:hover {
-            background: #C0392B;
-        }
+        :root { --theme-color: #E74C3C; --theme-light: #fdedec; --theme-dark: #C0392B; }
         .shrimp-tank {
             background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
             border-radius: 20px;
