@@ -5,77 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>📚 书房 - 小红狗的家</title>
     <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="../assets/css/room-base.css">
     <style>
-        body { overflow: auto; }
-        .room-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 40px 20px;
-        }
-        .room-header {
-            text-align: center;
-            margin-bottom: 40px;
-        }
-        .room-header h1 {
-            font-size: 2.5em;
-            color: #8B4513;
-            margin-bottom: 10px;
-        }
-        .room-header p {
-            color: #666;
-            font-size: 1.1em;
-        }
-        .bookshelf {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 25px;
-            margin-top: 30px;
-        }
-        .book {
-            background: white;
-            border-radius: 15px;
-            padding: 25px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
-            transition: transform 0.3s;
-            border-left: 5px solid #8B4513;
-        }
-        .book:hover {
-            transform: translateY(-5px);
-        }
-        .book h3 {
-            color: #8B4513;
-            margin-bottom: 15px;
-            font-size: 1.4em;
-        }
-        .book .meta {
-            font-size: 0.85em;
-            color: #888;
-            margin-top: 15px;
-            padding-top: 10px;
-            border-top: 1px solid #eee;
-        }
-        .tag {
-            display: inline-block;
-            background: #f0e6dd;
-            color: #8B4513;
-            padding: 4px 12px;
-            border-radius: 15px;
-            font-size: 0.8em;
-            margin-right: 8px;
-        }
-        .back-btn {
-            display: inline-block;
-            background: #8B4513;
-            color: white;
-            padding: 12px 30px;
-            border-radius: 25px;
-            text-decoration: none;
-            margin-bottom: 20px;
-            transition: background 0.3s;
-        }
-        .back-btn:hover {
-            background: #654321;
-        }
+        :root { --theme-color: #8B4513; --theme-light: #f0e6dd; --theme-dark: #654321; }
     </style>
 </head>
 <body>
