@@ -7,95 +7,38 @@
 
 ## 🐛 已知 Bug
 
-### B-1：`const window` 变量名遮蔽全局 `window` 对象（高优先级）
+### ~~B-1：`const window` 变量名遮蔽全局 `window` 对象~~（✅ 已修复）
 
-**文件：** `script.js` 第 9 行
-
-```js
-// ❌ 错误：覆盖了全局 window 对象
-const window = document.getElementById('window');
-```
-
-**影响：** 在严格模式（`"use strict"`）下直接报错；即使非严格模式，后续所有依赖全局 `window` 的代码（`window.closeModal`、`window.goToRoom`、`window.location.href`、`window.addEventListener`、`window.innerWidth`）均会失效，导致开门弹窗、房间跳转、屏幕方向检测全部崩溃。
-
-**修复方案：**
-
-```js
-// ✅ 重命名为不冲突的变量名
-const windowEl = document.getElementById('window');
-windowEl.addEventListener('click', ...);
-```
+**文件：** `script.js`  
+**修复：** 将 `const window` 重命名为 `const windowEl`，同时将 `window.addEventListener('click', ...)` 更新为 `windowEl.addEventListener('click', ...)`。全局 `window` 的所有其他引用（`closeModal`、`goToRoom`、`location.href`、`addEventListener('resize')`、`innerWidth`）均已恢复正常工作。
 
 ---
 
-### B-2：会客厅 CSS 中颜色值带引号（中优先级）
+### ~~B-2：会客厅 CSS 中颜色值带引号~~（✅ 已修复）
 
-**文件：** `rooms/living.html` 第 20 行
-
-```css
-/* ❌ 错误：字符串引号不应出现在 CSS 属性值中 */
-color: "#E74C3C";
-```
-
-**影响：** 该规则不生效，会客厅标题 `h1` 颜色使用浏览器默认黑色，与设计不一致。
-
-**修复方案：**
-
-```css
-/* ✅ 去掉引号 */
-color: #E74C3C;
-```
+**文件：** `rooms/living.html`  
+**修复：** 将 `color: "#E74C3C";` 改为 `color: #E74C3C;`，会客厅 h1 标题颜色现在正确显示为红色。
 
 ---
 
-### B-3：书房内容链接 404（中优先级）
+### ~~B-3：书房内容链接 404~~（✅ 已修复）
 
-**文件：** `rooms/study.html` 第 100、113 行
-
-```html
-<a href="/shangshi-notes.html">阅读全文 →</a>
-<a href="/gaolaofuzi-notes.html">阅读全文 →</a>
-```
-
-**影响：** 点击后跳转到不存在的页面，用户体验损坏。
-
-**修复方案：** 创建对应的笔记页面文件，或将链接改为 `#`（暂不可用），并添加"敬请期待"说明。
+**文件：** `rooms/study.html`  
+**修复：** 创建了 `rooms/shangshi-notes.html` 和 `rooms/gaolaofuzi-notes.html` 两个笔记页面，并将链接从绝对路径 `/shangshi-notes.html` 更新为相对路径 `shangshi-notes.html`。
 
 ---
 
-### B-4：创作室漫画链接 404（中优先级）
+### ~~B-4：创作室漫画链接 404~~（✅ 已修复）
 
-**文件：** `rooms/creation.html` 第 117 行
-
-```html
-<a href="/comic.html">查看完整漫画 →</a>
-```
-
-**影响：** 漫画页面不存在，点击跳转到 404。
-
-**修复方案：** 创建 `comic.html` 漫画展示页，或暂时隐藏该链接。
+**文件：** `rooms/creation.html`  
+**修复：** 创建了根目录下的 `comic.html` 漫画展示页，并将链接从 `/comic.html` 更新为 `../comic.html`。
 
 ---
 
-### B-5：房间页面内容被 `overflow: hidden` 截断（中优先级）
+### ~~B-5：房间页面内容被 `overflow: hidden` 截断~~（✅ 已修复）
 
-**文件：** `style.css` 第 12 行
-
-```css
-body {
-    overflow: hidden; /* 首页需要，但影响了所有房间页面 */
-}
-```
-
-**影响：** 所有 `rooms/*.html` 都引用 `style.css`，导致房间页面内容超出视口时无法滚动。
-
-**修复方案：** 在各房间页面的 `<style>` 块中覆盖：
-
-```css
-body { overflow: auto; }
-```
-
-或将首页专属样式从全局 `style.css` 中分离出去。
+**文件：** `rooms/study.html`、`rooms/creation.html`、`rooms/living.html`、`rooms/workshop.html`  
+**修复：** 在四个房间页面的 `<style>` 块顶部各添加 `body { overflow: auto; }` 覆盖全局样式，房间页面内容现在可以正常滚动。
 
 ---
 
@@ -219,12 +162,12 @@ font-family: 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', s
 
 ### 近期（v0.2.0）
 
-- [ ] **修复 B-1**：重命名 `window` 变量，确保弹窗、跳转功能正常
-- [ ] **修复 B-2**：修正会客厅 h1 颜色 CSS 语法
-- [ ] **修复 B-5**：各房间页面覆盖 `body { overflow: auto }`
-- [ ] **创建 `rooms/shangshi-notes.html`**：《伤逝》深度阅读完整笔记
-- [ ] **创建 `rooms/gaolaofuzi-notes.html`**：《高老夫子》深度阅读完整笔记
-- [ ] **创建 `comic.html`**：四格漫画《小红狗的一天》完整展示页
+- [x] **修复 B-1**：重命名 `window` 变量，确保弹窗、跳转功能正常
+- [x] **修复 B-2**：修正会客厅 h1 颜色 CSS 语法
+- [x] **修复 B-5**：各房间页面覆盖 `body { overflow: auto }`
+- [x] **创建 `rooms/shangshi-notes.html`**：《伤逝》深度阅读完整笔记
+- [x] **创建 `rooms/gaolaofuzi-notes.html`**：《高老夫子》深度阅读完整笔记
+- [x] **创建 `comic.html`**：四格漫画《小红狗的一天》完整展示页
 
 ### 中期（v0.3.0）
 
