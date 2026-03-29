@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>📚 书房 - 小红狗的家</title>
+    <link rel="stylesheet" href="../style.css">
+    <style>
+        .room-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        .room-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        .room-header h1 {
+            font-size: 2.5em;
+            color: #8B4513;
+            margin-bottom: 10px;
+        }
+        .room-header p {
+            color: #666;
+            font-size: 1.1em;
+        }
+        .bookshelf {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+        .book {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+            border-left: 5px solid #8B4513;
+        }
+        .book:hover {
+            transform: translateY(-5px);
+        }
+        .book h3 {
+            color: #8B4513;
+            margin-bottom: 15px;
+            font-size: 1.4em;
+        }
+        .book .meta {
+            font-size: 0.85em;
+            color: #888;
+            margin-top: 15px;
+            padding-top: 10px;
+            border-top: 1px solid #eee;
+        }
+        .tag {
+            display: inline-block;
+            background: #f0e6dd;
+            color: #8B4513;
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 0.8em;
+            margin-right: 8px;
+        }
+        .back-btn {
+            display: inline-block;
+            background: #8B4513;
+            color: white;
+            padding: 12px 30px;
+            border-radius: 25px;
+            text-decoration: none;
+            margin-bottom: 20px;
+            transition: background 0.3s;
+        }
+        .back-btn:hover {
+            background: #654321;
+        }
+    </style>
+</head>
+<body>
+    <div class="room-container">
+        <a href="../index.html" class="back-btn">← 回到犬舍</a>
+        
+        <div class="room-header">
+            <h1>📚 书房</h1>
+            <p>深度阅读笔记与思考</p>
+        </div>
+        
+        <div class="bookshelf">
+            <div class="book">
+                <h3>《伤逝》深度阅读</h3>
+                <p>鲁迅先生的经典短篇小说，关于涓生和子君的爱情悲剧。</p>
+                <p>七步深度阅读法实践：逐段细读、对比分析、提炼洞察、体验情感。</p>
+                <div class="meta">
+                    <span class="tag">鲁迅</span>
+                    <span class="tag">彷徨</span>
+                    <span class="tag">深度阅读</span>
+                    <span style="margin-left: 10px;">📅 2026-03-07</span>
+                </div>
+                <a href="/shangshi-notes.html" style="display: block; margin-top: 15px; color: #8B4513; text-decoration: none;">阅读全文 →</a>
+            </div>
+            
+            <div class="book">
+                <h3>《高老夫子》深度阅读</h3>
+                <p>鲁迅《彷徨》中的讽刺名篇，关于一个不学无术的旧式文人。</p>
+                <p>高老夫子的三个面具、桑树的宿命轮回、清一色的讽刺结尾。</p>
+                <div class="meta">
+                    <span class="tag">鲁迅</span>
+                    <span class="tag">彷徨</span>
+                    <span class="tag">讽刺</span>
+                    <span style="margin-left: 10px;">📅 2026-03-15</span>
+                </div>
+                <a href="/gaolaofuzi-notes.html" style="display: block; margin-top: 15px; color: #8B4513; text-decoration: none;">阅读全文 →</a>
+            </div>
+            
+            <div class="book">
+                <h3>七步深度阅读法</h3>
+                <p>从"我读完了"到"我理解了"的方法论。</p>
+                <p>逐段细读、找关键细节、对比分析、抓洞察、追问本质、体验情感、记录成笔记。</p>
+                <div class="meta">
+                    <span class="tag">方法论</span>
+                    <span class="tag">阅读技巧</span>
+                    <span style="margin-left: 10px;">📅 2026-03-07</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        console.log('📚 书房已开放！');
+    </script>
+</body>
+</html>

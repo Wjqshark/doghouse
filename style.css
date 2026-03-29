@@ -1,0 +1,1296 @@
+/* 小红狗的家 v3.0 - 温暖童话风格（精致复杂版） */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    overflow: hidden;
+    background: linear-gradient(to bottom, #87CEEB 0%, #B0E0F6 50%, #E0F6FF 100%);
+    min-height: 100vh;
+    touch-action: manipulation;
+}
+
+.container {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    overflow: hidden;
+}
+
+/* ==================== 白天天空背景 ==================== */
+.sky {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 60%;
+    z-index: 1;
+}
+
+/* 太阳（带光晕） */
+.sun {
+    position: absolute;
+    top: 40px;
+    right: 80px;
+    z-index: 10;
+}
+
+.sun-core {
+    font-size: 70px;
+    filter: drop-shadow(0 0 30px rgba(255, 255, 0, 0.6));
+    animation: sunGlow 3s ease-in-out infinite;
+}
+
+.sun-rays {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 120px;
+    height: 120px;
+    background: radial-gradient(circle, rgba(255, 255, 200, 0.4) 0%, transparent 70%);
+    border-radius: 50%;
+    animation: raysPulse 3s ease-in-out infinite;
+}
+
+@keyframes sunGlow {
+    0%, 100% { filter: drop-shadow(0 0 30px rgba(255, 255, 0, 0.6)); transform: scale(1); }
+    50% { filter: drop-shadow(0 0 50px rgba(255, 255, 0, 0.8)); transform: scale(1.05); }
+}
+
+@keyframes raysPulse {
+    0%, 100% { opacity: 0.6; transform: translate(-50%, -50%) scale(1); }
+    50% { opacity: 0.8; transform: translate(-50%, -50%) scale(1.1); }
+}
+
+/* 云朵 */
+.cloud {
+    position: absolute;
+    font-size: 50px;
+    opacity: 0.9;
+    filter: drop-shadow(0 5px 10px rgba(255, 255, 255, 0.5));
+    animation: float 20s linear infinite;
+}
+
+.cloud-1 {
+    top: 50px;
+    left: -100px;
+    animation-duration: 25s;
+}
+
+.cloud-2 {
+    top: 100px;
+    left: -150px;
+    animation-duration: 30s;
+    animation-delay: 5s;
+}
+
+.cloud-3 {
+    top: 150px;
+    left: -200px;
+    animation-duration: 35s;
+    animation-delay: 10s;
+    font-size: 40px;
+}
+
+@keyframes float {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(calc(100vw + 200px)); }
+}
+
+/* 小鸟 */
+.bird {
+    position: absolute;
+    font-size: 20px;
+    opacity: 0.8;
+    animation: birdFly 15s linear infinite;
+}
+
+.bird-1 {
+    top: 80px;
+    left: -50px;
+    animation-duration: 20s;
+}
+
+.bird-2 {
+    top: 120px;
+    left: -50px;
+    animation-duration: 25s;
+    animation-delay: 3s;
+}
+
+@keyframes birdFly {
+    0% { transform: translateX(0) translateY(0); }
+    25% { transform: translateX(25vw) translateY(-20px); }
+    50% { transform: translateX(50vw) translateY(0); }
+    75% { transform: translateX(75vw) translateY(20px); }
+    100% { transform: translateX(100vw) translateY(0); }
+}
+
+/* 顶部状态栏 */
+.top-status {
+    position: absolute;
+    top: 15px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(255, 255, 255, 0.95);
+    padding: 8px 20px;
+    border-radius: 20px;
+    font-size: 13px;
+    color: #555;
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    display: none;
+    white-space: nowrap;
+    z-index: 50;
+}
+
+.top-status .status-item {
+    margin: 0 8px;
+}
+
+.top-status .status-divider {
+    color: #ccc;
+    margin: 0 4px;
+}
+
+/* ==================== 犬舍主体 ==================== */
+.doghouse {
+    position: relative;
+    z-index: 10;
+    width: 700px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    margin-bottom: -15px;
+}
+
+.doghouse:hover {
+    transform: scale(1.01);
+}
+
+/* 屋顶 */
+.roof {
+    width: 100%;
+    height: 280px;
+    filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.3));
+    margin-bottom: -25px;
+}
+
+/* 屋顶瓦片动画 */
+.roof-tiles line {
+    animation: tileShine 5s ease-in-out infinite;
+}
+
+@keyframes tileShine {
+    0%, 100% { opacity: 0.6; }
+    50% { opacity: 0.8; }
+}
+
+/* 屋顶雕花装饰 */
+.roof-decor path {
+    animation: decorGlow 3s ease-in-out infinite;
+}
+
+@keyframes decorGlow {
+    0%, 100% { stroke: #DAA520; stroke-width: 2; }
+    50% { stroke: #FFD700; stroke-width: 2.5; }
+}
+
+/* 小阁楼窗 */
+.dormer-window {
+    animation: windowGlow 4s ease-in-out infinite;
+}
+
+@keyframes windowGlow {
+    0%, 100% { filter: brightness(1); }
+    50% { filter: brightness(1.1); }
+}
+
+/* 墙体（木质纹理） */
+.wall {
+    position: relative;
+    width: 92%;
+    margin: 0 auto;
+    height: 500px;
+    background: linear-gradient(135deg, #DEB887 0%, #D2A679 50%, #C49A6C 100%);
+    border-radius: 0 0 8px 8px;
+    overflow: hidden;
+    box-shadow: inset 0 -20px 40px rgba(0, 0, 0, 0.1);
+}
+
+.wood-wall {
+    background: linear-gradient(135deg, #DEB887 0%, #D2A679 50%, #C49A6C 100%);
+}
+
+/* 木板纹理 */
+.wood-planks {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        repeating-linear-gradient(
+            90deg,
+            transparent,
+            transparent 40px,
+            rgba(139, 69, 19, 0.1) 40px,
+            rgba(139, 69, 19, 0.1) 42px
+        );
+    opacity: 0.5;
+}
+
+/* ==================== 凸窗（飘窗） ==================== */
+.bay-window {
+    position: absolute;
+    left: 8%;
+    top: 120px;
+    width: 120px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    z-index: 5;
+}
+
+.bay-window:hover {
+    transform: scale(1.05);
+}
+
+.bay-frame {
+    background: linear-gradient(to bottom, #8B4513, #654321);
+    padding: 6px;
+    border-radius: 8px 8px 4px 4px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.bay-pane-left, .bay-pane-center, .bay-pane-right {
+    background: linear-gradient(135deg, #87CEEB, #E0F6FF);
+    border: 2px solid #654321;
+}
+
+.bay-pane-left {
+    height: 100px;
+    border-radius: 4px 0 0 4px;
+    transform: perspective(200px) rotateY(20deg);
+}
+
+.bay-pane-center {
+    height: 120px;
+    margin: 5px 0;
+    border-radius: 4px;
+}
+
+.bay-pane-right {
+    height: 100px;
+    border-radius: 0 4px 4px 0;
+    transform: perspective(200px) rotateY(-20deg);
+}
+
+.bay-sill {
+    background: #8B7355;
+    padding: 6px;
+    border-radius: 4px;
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+.bay-sill .flower {
+    font-size: 30px;
+}
+
+/* ==================== 拱形主窗户 ==================== */
+.window {
+    position: absolute;
+    top: 80px;
+    right: 8%;
+    width: 200px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.window:hover {
+    transform: scale(1.05);
+}
+
+.arch-frame {
+    background: linear-gradient(to bottom, #8B4513, #654321);
+    padding: 8px;
+    border-radius: 60px 60px 8px 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    border: 2px solid #654321;
+}
+
+.arch-pane {
+    position: relative;
+    width: 100%;
+    height: 150px;
+    background: linear-gradient(135deg, #87CEEB, #E0F6FF);
+    border-radius: 50px 50px 4px 4px;
+    overflow: hidden;
+    border: 2px solid #654321;
+}
+
+.window-light {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.6) 0%, transparent 60%);
+    animation: lightFlicker 4s ease-in-out infinite;
+}
+
+@keyframes lightFlicker {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.85; }
+}
+
+/* 窗户格子 */
+.window-grid {
+    position: absolute;
+    top: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: calc(100% - 16px);
+    height: calc(100% - 16px);
+    border-radius: 50px 50px 4px 4px;
+    border: 2px solid rgba(139, 69, 19, 0.4);
+    pointer-events: none;
+}
+
+.arch-grid::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: rgba(139, 69, 19, 0.4);
+}
+
+.arch-grid::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 0;
+    height: 50%;
+    width: 2px;
+    background: rgba(139, 69, 19, 0.4);
+}
+
+.curtain {
+    position: absolute;
+    top: 0;
+    width: 30%;
+    height: 100%;
+    background: linear-gradient(to right, #FF6B6B, #EE5A5A);
+    transition: transform 0.5s ease;
+    z-index: 5;
+}
+
+.curtain-left {
+    left: 0;
+    transform-origin: left;
+}
+
+.curtain-right {
+    right: 0;
+    transform-origin: right;
+}
+
+.window:hover .curtain-left {
+    transform: translateX(-20px);
+}
+
+.window:hover .curtain-right {
+    transform: translateX(20px);
+}
+
+/* 窗户里的迷你屏幕 */
+.window-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 70px;
+    height: 45px;
+    z-index: 10;
+}
+
+.mini-screen {
+    background: linear-gradient(135deg, #2c3e50, #34495e);
+    border-radius: 6px;
+    padding: 5px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+    border: 2px solid #555;
+}
+
+.screen-bar {
+    display: flex;
+    gap: 3px;
+    margin-bottom: 3px;
+}
+
+.screen-dot {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+}
+
+.screen-dot.red { background: #FF6B6B; }
+.screen-dot.yellow { background: #FFD93D; }
+.screen-dot.green { background: #6BCB77; }
+
+.screen-text {
+    font-size: 7px;
+    color: #4FD1C5;
+    font-family: 'Courier New', monospace;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.window-sill {
+    position: absolute;
+    bottom: -25px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 230px;
+    height: 35px;
+    background: #8B7355;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+.plant {
+    font-size: 36px;
+}
+
+.window-label {
+    position: absolute;
+    bottom: -25px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(79, 209, 197, 0.9);
+    color: white;
+    padding: 3px 10px;
+    border-radius: 10px;
+    font-size: 10px;
+    white-space: nowrap;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.window:hover .window-label {
+    opacity: 1;
+}
+
+/* ==================== 拱形门 ==================== */
+.door {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 160px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.door:hover {
+    transform: translateX(-50%) scale(1.03);
+}
+
+.arch-door-frame {
+    background: linear-gradient(to bottom, #8B4513, #654321);
+    padding: 6px;
+    border-radius: 55px 55px 0 0;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    border: 2px solid #654321;
+}
+
+.arch-door-panel {
+    position: relative;
+    width: 100%;
+    height: 200px;
+    background: linear-gradient(135deg, #8B6F47, #6B5344);
+    border-radius: 50px 50px 0 0;
+    transition: all 0.5s ease;
+    overflow: hidden;
+    border: 2px solid #654321;
+}
+
+.door:hover .arch-door-panel {
+    background: linear-gradient(135deg, #9B7F57, #7B6354);
+}
+
+/* 门缝暖光 */
+.door-light {
+    position: absolute;
+    bottom: 0;
+    left: 10%;
+    width: 80%;
+    height: 3px;
+    background: linear-gradient(to right, transparent, rgba(255, 220, 150, 0.9), transparent);
+    box-shadow: 0 0 15px rgba(255, 220, 150, 0.8);
+    animation: doorLightPulse 3s ease-in-out infinite;
+}
+
+@keyframes doorLightPulse {
+    0%, 100% { opacity: 0.6; height: 2px; }
+    50% { opacity: 1; height: 4px; }
+}
+
+.door-knob {
+    position: absolute;
+    right: 18px;
+    top: 55%;
+    width: 16px;
+    height: 16px;
+    background: radial-gradient(circle, #FFD700, #B8860B);
+    border-radius: 50%;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* 圆形门上的小窗 */
+.circular-window {
+    position: absolute;
+    top: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 70px;
+    height: 70px;
+    background: linear-gradient(135deg, #87CEEB, #E0F6FF);
+    border-radius: 50%;
+    border: 3px solid #654321;
+    overflow: hidden;
+    box-shadow: inset 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+/* 门板装饰线条 */
+.door-panel-decor {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60%;
+    height: 3px;
+    background: rgba(101, 67, 33, 0.4);
+    border-radius: 2px;
+}
+
+/* 木质门牌 */
+.wooden-sign {
+    position: absolute;
+    top: -60px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: linear-gradient(to bottom, #8B4513, #654321);
+    color: #FFF8DC;
+    padding: 10px 20px;
+    border-radius: 20px;
+    font-size: 18px;
+    font-weight: bold;
+    white-space: nowrap;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    border: 2px solid #654321;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    animation: signSwing 2s ease-in-out infinite;
+    z-index: 10;
+}
+
+.emoji {
+    font-size: 20px;
+}
+
+/* 竖长窗户（左侧三层） */
+.tall-window {
+    position: absolute;
+    left: 8%;
+    top: 100px;
+    width: 90px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.tall-window:hover {
+    transform: scale(1.03);
+}
+
+.tall-frame {
+    background: linear-gradient(to bottom, #8B4513, #654321);
+    padding: 6px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.tall-pane {
+    background: linear-gradient(135deg, #87CEEB, #E0F6FF);
+    border: 2px solid #654321;
+    margin-bottom: 4px;
+}
+
+.top-pane {
+    height: 100px;
+    border-radius: 4px 4px 2px 2px;
+}
+
+.middle-pane {
+    height: 100px;
+}
+
+.bottom-pane {
+    height: 100px;
+    border-radius: 2px 2px 4px 4px;
+    margin-bottom: 0;
+}
+
+.tall-sill {
+    background: #8B7355;
+    padding: 6px;
+    border-radius: 4px;
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+    margin-top: 4px;
+}
+
+.tall-sill .flower {
+    font-size: 24px;
+}
+
+@keyframes signSwing {
+    0%, 100% { transform: translateX(-50%) rotate(-2deg); }
+    50% { transform: translateX(-50%) rotate(2deg); }
+}
+
+.emoji {
+    font-size: 16px;
+}
+
+.doormat {
+    position: absolute;
+    bottom: -18px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: linear-gradient(to bottom, #8B7355, #6B5344);
+    color: #FFF8DC;
+    padding: 6px 20px;
+    border-radius: 4px;
+    font-size: 16px;
+    white-space: nowrap;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+/* 门前碗 */
+.bowl-area {
+    position: absolute;
+    bottom: -25px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 25px;
+    z-index: 20;
+}
+
+.bowl, .water-bowl {
+    font-size: 32px;
+    animation: bowlBounce 2s ease-in-out infinite;
+}
+
+.water-bowl {
+    animation-delay: 0.3s;
+}
+
+@keyframes bowlBounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-3px); }
+}
+
+/* 门两侧灯柱 */
+.door-lamp {
+    position: absolute;
+    bottom: -10px;
+}
+
+.left-lamp {
+    left: -28px;
+}
+
+.right-lamp {
+    right: -28px;
+}
+
+.lamp-post {
+    width: 10px;
+    height: 80px;
+    background: linear-gradient(to right, #654321, #8B4513, #654321);
+    border-radius: 3px;
+}
+
+.lamp-light {
+    position: absolute;
+    top: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 30px;
+    height: 30px;
+    background: radial-gradient(circle, rgba(255, 255, 200, 0.9), rgba(255, 200, 100, 0.4), transparent);
+    border-radius: 50%;
+    box-shadow: 0 0 20px rgba(255, 220, 150, 0.6);
+    animation: lampGlow 2s ease-in-out infinite;
+}
+
+@keyframes lampGlow {
+    0%, 100% { opacity: 0.8; transform: translateX(-50%) scale(1); }
+    50% { opacity: 1; transform: translateX(-50%) scale(1.1); }
+}
+
+/* 爪印装饰 */
+.paw-print {
+    position: absolute;
+    font-size: 32px;
+    opacity: 0.7;
+}
+
+.paw-1 {
+    right: -35px;
+    top: 120px;
+    transform: rotate(15deg);
+}
+
+.paw-2 {
+    left: -30px;
+    top: 150px;
+    transform: rotate(-10deg);
+}
+
+.paw-3 {
+    left: -35px;
+    top: 220px;
+    transform: rotate(-15deg);
+}
+
+/* 左侧装饰 */
+.left-decor {
+    position: absolute;
+    left: -30px;
+    top: 90px;
+}
+
+/* 侧边装饰（移到门右侧墙上） */
+.side-decor {
+    position: absolute;
+    right: 15%;
+    top: 280px;
+    display: flex;
+    flex-direction: column;
+    gap: 35px;
+}
+
+.bone, .ball {
+    font-size: 50px;
+    animation: bounce 1s ease-in-out infinite;
+}
+
+.ball {
+    animation-delay: 0.5s;
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+/* 爬藤植物 */
+.vine {
+    position: absolute;
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.left-vine {
+    left: 15px;
+}
+
+.right-vine {
+    right: 15px;
+}
+
+.leaf {
+    font-size: 30px;
+    animation: leafSway 3s ease-in-out infinite;
+}
+
+.leaf:nth-child(2) {
+    animation-delay: 0.5s;
+}
+
+.leaf:nth-child(3) {
+    animation-delay: 1s;
+}
+
+.vine-flower {
+    font-size: 20px;
+    animation: flowerBloom 4s ease-in-out infinite;
+}
+
+@keyframes leafSway {
+    0%, 100% { transform: rotate(-5deg); }
+    50% { transform: rotate(5deg); }
+}
+
+@keyframes flowerBloom {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+}
+
+/* 地基（石头材质） */
+.stone-foundation {
+    width: 100%;
+    height: 25px;
+    background: linear-gradient(to bottom, #8B7355, #6B5344);
+    border-radius: 0 0 4px 4px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+/* ==================== 小院子 ==================== */
+.yard {
+    position: relative;
+    z-index: 5;
+    width: 100%;
+    height: 200px;
+    background: linear-gradient(to bottom, #90EE90, #228B22);
+}
+
+.grass {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        repeating-linear-gradient(
+            90deg,
+            transparent,
+            transparent 10px,
+            rgba(0, 0, 0, 0.05) 10px,
+            rgba(0, 0, 0, 0.05) 11px
+        );
+}
+
+/* 花朵装饰 */
+.flowers {
+    position: absolute;
+    bottom: 80px;
+    display: flex;
+    gap: 15px;
+}
+
+.flowers-left {
+    left: 80px;
+}
+
+.flowers-right {
+    right: 80px;
+}
+
+.flowers .flower {
+    font-size: 24px;
+    animation: flowerSway 3s ease-in-out infinite;
+}
+
+.flowers .flower:nth-child(2) {
+    animation-delay: 0.5s;
+}
+
+.flowers .flower:nth-child(3) {
+    animation-delay: 1s;
+}
+
+@keyframes flowerSway {
+    0%, 100% { transform: rotate(-3deg); }
+    50% { transform: rotate(3deg); }
+}
+
+/* 石子路 */
+.path {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 140px;
+    height: 70px;
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+}
+
+.stone {
+    width: 25px;
+    height: 25px;
+    background: radial-gradient(circle, #A8A8A8, #808080);
+    border-radius: 50%;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+/* 树 */
+.tree {
+    position: absolute;
+    left: 60px;
+    bottom: 70px;
+    font-size: 80px;
+    filter: drop-shadow(0 5px 10px rgba(0, 0, 0, 0.3));
+}
+
+/* 砖围栏 */
+.brick-fence {
+    position: absolute;
+    right: 60px;
+    bottom: 70px;
+    display: flex;
+    gap: 8px;
+}
+
+.fence-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.brick-post {
+    width: 15px;
+    height: 70px;
+    background: linear-gradient(to right, #8B4513, #A0522D, #8B4513);
+    border-radius: 4px 4px 0 0;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+.brick-rail {
+    width: 60px;
+    height: 10px;
+    background: linear-gradient(to bottom, #A0522D, #8B4513);
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* 路灯 */
+.street-lamp {
+    position: absolute;
+    left: 180px;
+    bottom: 80px;
+}
+
+.street-lamp .lamp-post {
+    width: 10px;
+    height: 90px;
+    background: linear-gradient(to right, #654321, #8B4513, #654321);
+    border-radius: 4px;
+}
+
+.street-lamp .lamp-light {
+    position: absolute;
+    top: -22px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 35px;
+    height: 35px;
+    background: radial-gradient(circle, rgba(255, 255, 200, 0.9), rgba(255, 200, 100, 0.4), transparent);
+    border-radius: 50%;
+    box-shadow: 0 0 25px rgba(255, 220, 150, 0.6);
+    animation: lampGlow 2s ease-in-out infinite;
+}
+
+/* 左侧信息卡 */
+.yard-left {
+    position: absolute;
+    left: 80px;
+    bottom: 80px;
+    display: none;
+}
+
+.info-card {
+    background: rgba(255, 255, 255, 0.95);
+    padding: 15px 20px;
+    border-radius: 15px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    min-width: 200px;
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.card-title {
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+}
+
+.card-status {
+    font-size: 13px;
+    color: #666;
+    margin-bottom: 12px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.card-detail {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.detail-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 12px;
+    color: #555;
+}
+
+.detail-row span:first-child {
+    min-width: 50px;
+}
+
+.progress-bar {
+    flex: 1;
+    height: 8px;
+    background: #e0e0e0;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.progress {
+    height: 100%;
+    background: linear-gradient(90deg, #667eea, #764ba2);
+    border-radius: 4px;
+    transition: width 0.5s ease;
+}
+
+.progress.fill-65 { width: 65%; }
+.progress.fill-42 { width: 42%; }
+.progress.fill-78 { width: 78%; }
+
+/* 状态点 */
+.status-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    animation: dotPulse 2s ease-in-out infinite;
+}
+
+.status-dot.online {
+    background: #4CAF50;
+}
+
+@keyframes dotPulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.6; transform: scale(0.9); }
+}
+
+/* ==================== 互动提示 ==================== */
+.hint {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(255, 255, 255, 0.95);
+    padding: 12px 24px;
+    border-radius: 25px;
+    font-size: 16px;
+    color: #333;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    z-index: 100;
+    animation: hintPulse 2s ease-in-out infinite;
+}
+
+@keyframes hintPulse {
+    0%, 100% { transform: translateX(-50%) scale(1); }
+    50% { transform: translateX(-50%) scale(1.05); }
+}
+
+/* ==================== 响应式布局 ==================== */
+
+/* 竖屏（手机） */
+@media (max-width: 768px) or (orientation: portrait) {
+    .doghouse {
+        width: 360px;
+        margin-bottom: 0;
+    }
+    
+    .roof {
+        height: 180px;
+        margin-bottom: 0;
+    }
+    
+    .wall {
+        height: 280px;
+    }
+    
+    .window {
+        width: 100px;
+    }
+    
+    .arch-pane {
+        height: 75px;
+    }
+    
+    .window-content {
+        width: 60px;
+        height: 35px;
+    }
+    
+    .screen-text {
+        font-size: 6px;
+    }
+    
+    .door {
+        width: 90px;
+    }
+    
+    .arch-door-panel {
+        height: 120px;
+    }
+    
+    .wooden-sign {
+        font-size: 12px;
+        padding: 6px 12px;
+    }
+    
+    .yard {
+        height: 130px;
+    }
+    
+    .tree {
+        font-size: 50px;
+        left: 20px;
+    }
+    
+    .brick-fence {
+        right: 20px;
+    }
+    
+    .street-lamp {
+        left: 90px;
+    }
+    
+    .bay-window {
+        display: none;
+    }
+    
+    .info-card {
+        display: none;
+    }
+    
+    .top-status {
+        display: none;
+    }
+    
+    .hint {
+        bottom: 20px;
+        font-size: 14px;
+        padding: 10px 18px;
+    }
+}
+
+/* 横屏（平板/电脑） */
+@media (min-width: 769px) and (orientation: landscape) {
+    .doghouse {
+        width: 700px;
+    }
+    
+    .wall {
+        height: 500px;
+    }
+    
+    .yard {
+        height: 180px;
+    }
+    
+    .yard-left {
+        display: block;
+    }
+    
+    .top-status {
+        display: block;
+    }
+    
+    .cloud-3 {
+        display: block;
+    }
+}
+
+/* 超大屏幕 */
+@media (min-width: 1200px) {
+    .doghouse {
+        width: 800px;
+    }
+    
+    .wall {
+        height: 570px;
+    }
+    
+    .window {
+        width: 140px;
+    }
+    
+    .arch-pane {
+        height: 100px;
+    }
+    
+    .door {
+        width: 130px;
+    }
+    
+    .arch-door-panel {
+        height: 170px;
+    }
+    
+    .yard {
+        height: 200px;
+    }
+    
+    .yard-left {
+        left: 100px;
+        bottom: 70px;
+    }
+    
+    .info-card {
+        transform: scale(1.1);
+    }
+}
+
+/* ==================== 摇尾巴动画 ==================== */
+@keyframes wag {
+    0%, 100% { transform: rotate(0); }
+    25% { transform: rotate(-3deg); }
+    75% { transform: rotate(3deg); }
+}
+
+.doghouse.wagging {
+    animation: wag 0.5s ease-in-out 3;
+}

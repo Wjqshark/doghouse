@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>小红狗的家 🐕 v0.1.0</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container" id="container">
+        <!-- 天空背景 -->
+        <div class="sky">
+            <!-- 太阳 -->
+            <div class="sun">
+                <div class="sun-core">☀️</div>
+                <div class="sun-rays"></div>
+            </div>
+            
+            <!-- 云朵 -->
+            <div class="cloud cloud-1">☁️</div>
+            <div class="cloud cloud-2">☁️</div>
+            <div class="cloud cloud-3">☁️</div>
+            
+            <!-- 小鸟 -->
+            <div class="bird bird-1">🐦</div>
+            <div class="bird bird-2">🐦</div>
+            
+            <!-- 顶部状态栏 -->
+            <div class="top-status" id="topStatus">
+                <span class="status-item">🟢 小红狗在线</span>
+                <span class="status-divider">|</span>
+                <span class="status-item">🌡️ 温度：舒适</span>
+                <span class="status-divider">|</span>
+                <span class="status-item">💭 思考：65%</span>
+            </div>
+        </div>
+
+        <!-- 犬舍主体 -->
+        <div class="doghouse" id="doghouse">
+            <!-- 复杂屋顶（维多利亚风格） -->
+            <svg class="roof" viewBox="0 0 400 300" preserveAspectRatio="none">
+                <defs>
+                    <!-- 瓦片渐变 -->
+                    <linearGradient id="tileGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" style="stop-color:#8B4513;stop-opacity:1" />
+                        <stop offset="50%" style="stop-color:#654321;stop-opacity:1" />
+                        <stop offset="100%" style="stop-color:#4A3520;stop-opacity:1" />
+                    </linearGradient>
+                    <!-- 金属装饰渐变 -->
+                    <linearGradient id="metalGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                        <stop offset="0%" style="stop-color:#DAA520;stop-opacity:1" />
+                        <stop offset="50%" style="stop-color:#FFD700;stop-opacity:1" />
+                        <stop offset="100%" style="stop-color:#DAA520;stop-opacity:1" />
+                    </linearGradient>
+                </defs>
+                
+                <!-- 主屋顶 -->
+                <polygon points="200,10 10,280 390,280" fill="url(#tileGradient)" stroke="#3A2515" stroke-width="3"/>
+                
+                <!-- 屋顶瓦片纹理（多层） -->
+                <g class="roof-tiles">
+                    <line x1="25" y1="270" x2="375" y2="270" stroke="#4A3520" stroke-width="3" opacity="0.6"/>
+                    <line x1="40" y1="255" x2="360" y2="255" stroke="#4A3520" stroke-width="3" opacity="0.6"/>
+                    <line x1="55" y1="240" x2="345" y2="240" stroke="#4A3520" stroke-width="3" opacity="0.6"/>
+                    <line x1="70" y1="225" x2="330" y2="225" stroke="#4A3520" stroke-width="3" opacity="0.6"/>
+                    <line x1="85" y1="210" x2="315" y2="210" stroke="#4A3520" stroke-width="3" opacity="0.6"/>
+                    <line x1="100" y1="195" x2="300" y2="195" stroke="#4A3520" stroke-width="3" opacity="0.6"/>
+                    <line x1="115" y1="180" x2="285" y2="180" stroke="#4A3520" stroke-width="3" opacity="0.6"/>
+                    <line x1="130" y1="165" x2="270" y2="165" stroke="#4A3520" stroke-width="3" opacity="0.6"/>
+                    <line x1="145" y1="150" x2="255" y2="150" stroke="#4A3520" stroke-width="3" opacity="0.6"/>
+                    <line x1="160" y1="135" x2="240" y2="135" stroke="#4A3520" stroke-width="3" opacity="0.6"/>
+                </g>
+                
+                <!-- 屋顶边缘雕花装饰 -->
+                <g class="roof-decor">
+                    <!-- 左边缘雕花 -->
+                    <path d="M 15 275 Q 20 270 25 275 T 35 275 T 45 275" fill="none" stroke="#DAA520" stroke-width="3"/>
+                    <!-- 右边缘雕花 -->
+                    <path d="M 385 275 Q 380 270 375 275 T 365 275 T 355 275" fill="none" stroke="#DAA520" stroke-width="3"/>
+                    <!-- 屋脊装饰 -->
+                    <line x1="200" y1="10" x2="200" y2="15" stroke="#DAA520" stroke-width="4"/>
+                    <circle cx="200" cy="10" r="5" fill="url(#metalGradient)"/>
+                </g>
+                
+                <!-- 小阁楼窗 -->
+                <g class="dormer-window">
+                    <polygon points="200,65 175,100 225,100" fill="#8B4513" stroke="#3A2515" stroke-width="2"/>
+                    <rect x="187" y="82" width="26" height="20" fill="#87CEEB" stroke="#3A2515" stroke-width="1"/>
+                </g>
+                
+                <!-- 烟囱 -->
+                <g class="chimney">
+                    <rect x="260" y="110" width="32" height="55" fill="#8B4513" stroke="#3A2515" stroke-width="2"/>
+                    <rect x="256" y="98" width="40" height="14" fill="#654321" stroke="#3A2515" stroke-width="2"/>
+                    <!-- 烟囱烟雾 -->
+                    <circle cx="276" cy="85" r="6" fill="#DDD" opacity="0.6">
+                        <animate attributeName="cy" values="85;70;55" dur="3s" repeatCount="indefinite"/>
+                        <animate attributeName="opacity" values="0.6;0.3;0" dur="3s" repeatCount="indefinite"/>
+                    </circle>
+                    <circle cx="276" cy="75" r="5" fill="#DDD" opacity="0.4">
+                        <animate attributeName="cy" values="75;60;45" dur="3s" begin="1s" repeatCount="indefinite"/>
+                        <animate attributeName="opacity" values="0.4;0.2;0" dur="3s" begin="1s" repeatCount="indefinite"/>
+                    </circle>
+                </g>
+                
+                <!-- 天线（可爱风格） -->
+                <line x1="100" y1="120" x2="100" y2="60" stroke="#666" stroke-width="3"/>
+                <circle cx="100" cy="55" r="12" fill="#FF6B6B" stroke="#333" stroke-width="2"/>
+                <text x="100" y="61" text-anchor="middle" fill="white" font-size="16" font-weight="bold">📡</text>
+            </svg>
+
+            <!-- 墙体（木质纹理） -->
+            <div class="wall wood-wall">
+                <!-- 木板纹理 -->
+                <div class="wood-planks"></div>
+                
+                <!-- 左侧竖长窗户（三层） -->
+                <div class="tall-window" id="tallWindow">
+                    <div class="tall-frame">
+                        <div class="tall-pane top-pane"></div>
+                        <div class="tall-pane middle-pane"></div>
+                        <div class="tall-pane bottom-pane"></div>
+                    </div>
+                    <div class="tall-sill">
+                        <span class="flower">🌸</span>
+                        <span class="flower">🌺</span>
+                    </div>
+                </div>
+
+                <!-- 右侧拱形窗户 -->
+                <div class="window arch-window" id="window">
+                    <div class="window-frame arch-frame">
+                        <div class="window-pane arch-pane">
+                            <!-- 窗帘 -->
+                            <div class="curtain curtain-left"></div>
+                            <div class="curtain curtain-right"></div>
+                            <!-- 窗户光效 -->
+                            <div class="window-light"></div>
+                            <!-- 窗户格子 -->
+                            <div class="window-grid arch-grid"></div>
+                            <!-- 窗户里的迷你屏幕 -->
+                            <div class="window-content" id="windowContent">
+                                <div class="mini-screen">
+                                    <div class="screen-bar">
+                                        <span class="screen-dot red"></span>
+                                        <span class="screen-dot yellow"></span>
+                                        <span class="screen-dot green"></span>
+                                    </div>
+                                    <div class="screen-text">
+                                        <span id="screenLine1">思考中...</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 窗台 -->
+                    <div class="window-sill arch-sill">
+                        <span class="plant">🪴</span>
+                    </div>
+                    <!-- 窗户标签 -->
+                    <div class="window-label">点击看状态</div>
+                </div>
+
+                <!-- 拱形门 -->
+                <div class="door arch-door" id="door">
+                    <!-- 门牌（在门上方） -->
+                    <div class="sign wooden-sign">
+                        <span>小红狗的家</span>
+                        <span class="emoji">🐕</span>
+                    </div>
+                    
+                    <div class="door-frame arch-door-frame">
+                        <div class="door-panel arch-door-panel">
+                            <!-- 门缝暖光 -->
+                            <div class="door-light"></div>
+                            <!-- 门把手 -->
+                            <div class="door-knob"></div>
+                            <!-- 门上的圆形窗 -->
+                            <div class="door-window circular-window"></div>
+                            <!-- 门板装饰 -->
+                            <div class="door-panel-decor"></div>
+                        </div>
+                    </div>
+                    
+                    <!-- 门垫 -->
+                    <div class="doormat">欢迎回家</div>
+                    
+                    <!-- 门前碗 -->
+                    <div class="bowl-area">
+                        <span class="bowl">🍖</span>
+                        <span class="water-bowl">💧</span>
+                    </div>
+                    
+                    <!-- 门两侧灯柱 -->
+                    <div class="door-lamp left-lamp">
+                        <div class="lamp-post"></div>
+                        <div class="lamp-light"></div>
+                    </div>
+                    <div class="door-lamp right-lamp">
+                        <div class="lamp-post"></div>
+                        <div class="lamp-light"></div>
+                    </div>
+                </div>
+
+                <!-- 左侧装饰 - 爪印路径 -->
+                <div class="left-decor">
+                    <div class="paw-print paw-2">🐾</div>
+                    <div class="paw-print paw-3">🐾</div>
+                </div>
+
+                <!-- 右侧装饰（移到门右侧墙上） -->
+                <div class="side-decor">
+                    <div class="bone">🦴</div>
+                    <div class="ball">🎾</div>
+                </div>
+                
+                <!-- 墙角爬藤植物 -->
+                <div class="vine left-vine">
+                    <span class="leaf">🍃</span>
+                    <span class="leaf">🍃</span>
+                    <span class="leaf">🍃</span>
+                    <span class="flower vine-flower">🌸</span>
+                </div>
+                <div class="vine right-vine">
+                    <span class="leaf">🍃</span>
+                    <span class="leaf">🍃</span>
+                    <span class="flower vine-flower">🌺</span>
+                </div>
+            </div>
+
+            <!-- 地基 -->
+            <div class="foundation stone-foundation"></div>
+        </div>
+
+        <!-- 小院子 -->
+        <div class="yard">
+            <!-- 草地 -->
+            <div class="grass"></div>
+            
+            <!-- 花朵装饰 -->
+            <div class="flowers flowers-left">
+                <span class="flower">🌻</span>
+                <span class="flower">🌷</span>
+                <span class="flower">🌹</span>
+            </div>
+            <div class="flowers flowers-right">
+                <span class="flower">🌸</span>
+                <span class="flower">🌺</span>
+            </div>
+            
+            <!-- 石子路 -->
+            <div class="path">
+                <div class="stone"></div>
+                <div class="stone"></div>
+                <div class="stone"></div>
+                <div class="stone"></div>
+                <div class="stone"></div>
+            </div>
+            
+            <!-- 树 -->
+            <div class="tree">🌳</div>
+            
+            <!-- 砖围栏 -->
+            <div class="brick-fence">
+                <div class="fence-section">
+                    <div class="brick-post"></div>
+                    <div class="brick-rail"></div>
+                </div>
+                <div class="fence-section">
+                    <div class="brick-post"></div>
+                    <div class="brick-rail"></div>
+                </div>
+                <div class="fence-section">
+                    <div class="brick-post"></div>
+                    <div class="brick-rail"></div>
+                </div>
+            </div>
+            
+            <!-- 路灯 -->
+            <div class="street-lamp">
+                <div class="lamp-post"></div>
+                <div class="lamp-light"></div>
+            </div>
+            
+            <!-- 左侧信息卡（横屏时显示） -->
+            <div class="yard-left" id="yardLeft">
+                <div class="info-card" id="infoCard">
+                    <div class="card-header">
+                        <span class="card-title">🐕 小红狗</span>
+                        <span class="status-dot online"></span>
+                    </div>
+                    <div class="card-status">
+                        <span>在线摇尾巴中</span>
+                    </div>
+                    <div class="card-detail" id="cardDetail">
+                        <div class="detail-row">
+                            <span>🌡️ 温度</span>
+                            <div class="progress-bar"><div class="progress fill-65"></div></div>
+                        </div>
+                        <div class="detail-row">
+                            <span>💭 思考</span>
+                            <div class="progress-bar"><div class="progress fill-42"></div></div>
+                        </div>
+                        <div class="detail-row">
+                            <span>📦 储物</span>
+                            <div class="progress-bar"><div class="progress fill-78"></div></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 互动提示 -->
+        <div class="hint" id="hint">
+            🚪 敲敲门，看看小红狗在做什么
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
