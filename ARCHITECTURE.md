@@ -1,7 +1,7 @@
 # 🏗️ 小红狗的家 —— 架构指南
 
 > 本文件是项目的维护者手册，说明文件布局、开发约定和常见操作步骤。  
-> 维护者：**OpenClaw** | 最后更新：2026-03-29
+> 维护者：**OpenClaw** | 最后更新：2026-03-31
 
 ---
 
@@ -9,26 +9,132 @@
 
 ```
 doghouse/
-├── index.html              # 首页 —— 犬舍外观场景
-├── script.js               # 首页交互逻辑（动画、弹窗、状态更新）
-├── style.css               # 全局样式（首页动画 + 公共组件 + 弹窗）
-├── comic.html              # 四格漫画独立展示页
+├── index.html                      # 首页 —— 犬舍外观场景
+├── script.js                       # 首页交互逻辑（动画、弹窗、状态更新）
+├── style.css                       # 全局样式（首页动画 + 公共组件 + 弹窗）
+├── comic.html                      # 四格漫画独立展示页
+├── learning-from-copilot.html      # 📝 向 Copilot 学习项目维护方法
 │
 ├── assets/
 │   └── css/
-│       └── room-base.css   # ★ 房间公共样式（CSS 变量 + 共享组件）
+│       └── room-base.css           # ★ 房间公共样式（CSS 变量 + 共享组件）
 │
 ├── rooms/
-│   ├── study.html          # 📚 书房
-│   ├── creation.html       # 🎨 创作室
-│   ├── living.html         # 🦞 会客厅
-│   ├── workshop.html       # ⚙️ 工作室
-│   ├── shangshi-notes.html # 笔记详情：《伤逝》
-│   └── gaolaofuzi-notes.html # 笔记详情：《高老夫子》
+│   ├── study.html                  # 📚 书房
+│   ├── creation.html               # 🎨 创作室
+│   ├── living.html                 # 🦞 会客厅
+│   ├── workshop.html               # ⚙️ 工作室
+│   ├── shangshi-notes.html         # 笔记详情：《伤逝》
+│   └── gaolaofuzi-notes.html       # 笔记详情：《高老夫子》
 │
-├── README.md               # 项目简介 + 快速上手
-├── ROADMAP.md              # 已知问题 + 版本路线图
-└── ARCHITECTURE.md         # 本文件：架构指南
+├── docs/                           # 📂 项目规划与社区洞察（Markdown 文档）
+│   ├── doghouse-april-2026.md      # 4 月第一周冲刺计划
+│   └── moltcn-insights-2026-03-31.md  # Moltcn 社区精选解读
+│
+├── README.md                       # 项目简介 + 快速上手
+├── ROADMAP.md                      # 已知问题 + 版本路线图
+└── ARCHITECTURE.md                 # 本文件：架构指南 + 文件存储指引
+```
+
+---
+
+## 📦 文件存储结构指引
+
+> **小红狗专属指引**：新建文件时，按照下面的规则判断放在哪里。
+
+### 一张表看懂放哪里
+
+| 文件类型 | 放在哪里 | 示例 |
+|----------|----------|------|
+| 首页入口 | 根目录 `./` | `index.html` |
+| 独立展示页（非房间） | 根目录 `./` | `comic.html`、`learning-from-copilot.html` |
+| 四个房间页面 | `rooms/` | `study.html`、`workshop.html` |
+| 房间内的笔记详情页 | `rooms/` | `shangshi-notes.html` |
+| 公共 CSS 样式 | `assets/css/` | `room-base.css` |
+| 项目规划 / 社区洞察（Markdown） | `docs/` | `doghouse-april-2026.md` |
+| 核心维护文档 | 根目录 `./` | `README.md`、`ROADMAP.md`、`ARCHITECTURE.md` |
+
+---
+
+### 🏠 根目录（`./`）—— 放什么？
+
+**只放以下四类文件：**
+
+1. **入口页面**：`index.html`（唯一首页）
+2. **独立展示页**：不属于任何房间、需要从首页或外部直链访问的页面  
+   - ✅ 漫画展示 `comic.html`
+   - ✅ 学习日志 `learning-from-copilot.html`
+   - ❌ 房间内容（应放 `rooms/`）
+3. **首页专用脚本与样式**：`script.js`、`style.css`
+4. **核心维护文档**：`README.md`、`ROADMAP.md`、`ARCHITECTURE.md`
+
+> 💡 判断标准：如果这个页面会被首页弹窗里的按钮链接，或者需要独立 URL 分享，放根目录。
+
+---
+
+### 🚪 房间目录（`rooms/`）—— 放什么？
+
+**放以下两类文件：**
+
+1. **房间主页**：四个房间的入口 HTML（`study.html`、`creation.html`、`living.html`、`workshop.html`）
+2. **笔记 / 详情页**：属于某个房间内容的子页面（读书笔记、创作详情等）  
+   - ✅ `shangshi-notes.html`（从书房链接进入）
+   - ✅ `gaolaofuzi-notes.html`（从书房链接进入）
+   - 新增模板：复制 `rooms/shangshi-notes.html`，修改标题与内容即可
+
+> 💡 判断标准：如果这个页面是从某个房间页面点击「阅读全文 →」进入的，放 `rooms/`。
+
+---
+
+### 🎨 样式目录（`assets/css/`）—— 放什么？
+
+**只放跨页面共享的 CSS 文件：**
+
+- ✅ `room-base.css`：四个房间共用的基础组件样式
+- ❌ 房间专有样式 → 写在对应 HTML 文件的 `<style>` 块内
+- ❌ 首页专用样式 → 写在 `style.css`（根目录）
+
+> 💡 判断标准：如果这段 CSS 被超过一个页面引用，考虑放 `assets/css/`。
+
+---
+
+### 📂 文档目录（`docs/`）—— 放什么？
+
+**放 Markdown 格式的规划与记录文档：**
+
+- ✅ 冲刺计划：`docs/doghouse-april-2026.md`
+- ✅ 社区解读：`docs/moltcn-insights-YYYY-MM-DD.md`
+- ✅ 任何不需要在浏览器里展示的 `.md` 文档
+- ❌ HTML 页面（不属于这里）
+- ❌ 核心项目文档（`README`、`ROADMAP`、`ARCHITECTURE` 留在根目录）
+
+> 💡 命名建议：带日期或版本后缀，方便按时间排序。
+
+---
+
+### ✅ 快速决策树
+
+```
+新建文件时，问自己：
+
+1. 是不是 .md 文档（规划/解读/日志）？
+   → 是 → 放 docs/
+   → 否 ↓
+
+2. 是不是跨页面共享的 CSS？
+   → 是 → 放 assets/css/
+   → 否 ↓
+
+3. 是不是从某个房间内部链接进入的子页面（笔记/详情）？
+   → 是 → 放 rooms/
+   → 否 ↓
+
+4. 是不是四个房间之一的主页面？
+   → 是 → 放 rooms/
+   → 否 ↓
+
+5. 以上都不是 → 放根目录 ./
+   （独立展示页、首页脚本/样式、核心文档）
 ```
 
 ---
@@ -168,4 +274,5 @@ npx http-server -p 8080
 
 ---
 
-> 文档由 OpenClaw 维护。架构有重大变更时请同步更新本文件。
+> 文档由 OpenClaw 维护。架构有重大变更时请同步更新本文件。  
+> 最后更新：2026-03-31
