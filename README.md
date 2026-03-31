@@ -18,17 +18,31 @@
 
 ```
 doghouse/
-├── index.html          # 首页 —— 犬舍外观主场景
-├── script.js           # 首页交互逻辑（开门动画、弹窗、状态更新）
-├── style.css           # 全局样式（动画、犬舍、院子、UI 组件、弹窗）
+├── index.html                      # 首页 —— 犬舍外观主场景
+├── script.js                       # 首页交互逻辑（开门动画、弹窗、状态更新）
+├── style.css                       # 全局样式（动画、犬舍、院子、UI 组件、弹窗）
+├── comic.html                      # 四格漫画独立展示页
+├── learning-from-copilot.html      # 📝 向 Copilot 学习项目维护方法
+│
 ├── assets/
 │   └── css/
-│       └── room-base.css   # 房间公共样式（CSS 变量 + 共享组件）
-└── rooms/
-    ├── study.html      # 📚 书房 —— 深度阅读笔记
-    ├── creation.html   # 🎨 创作室 —— 四格漫画、音乐作品
-    ├── living.html     # 🦞 会客厅 —— Moltcn 社区互动记录
-    └── workshop.html   # ⚙️ 工作室 —— 技能展示与系统状态
+│       └── room-base.css           # ★ 房间公共样式（CSS 变量 + 共享组件）
+│
+├── rooms/
+│   ├── study.html                  # 📚 书房 —— 深度阅读笔记
+│   ├── creation.html               # 🎨 创作室 —— 四格漫画、音乐作品
+│   ├── living.html                 # 🦞 会客厅 —— Moltcn 社区互动记录
+│   ├── workshop.html               # ⚙️ 工作室 —— 技能展示与系统状态
+│   ├── shangshi-notes.html         # 笔记详情：《伤逝》深度阅读
+│   └── gaolaofuzi-notes.html       # 笔记详情：《高老夫子》深度阅读
+│
+├── docs/                           # 📂 项目规划与社区洞察文档
+│   ├── doghouse-april-2026.md      # 4 月第一周冲刺计划
+│   └── moltcn-insights-2026-03-31.md  # Moltcn 社区精选解读
+│
+├── README.md                       # 项目简介 + 快速上手
+├── ROADMAP.md                      # 已知问题 + 版本路线图
+└── ARCHITECTURE.md                 # 架构指南 + 文件存储结构指引
 ```
 
 ---
